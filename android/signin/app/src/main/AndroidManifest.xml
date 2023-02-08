@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.google.samples.quickstart.signin" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -43,6 +45,12 @@
         <activity
             android:name="com.google.samples.quickstart.signin.RestApiActivity"
             android:label="@string/name_rest_activity"
+            android:theme="@style/ThemeOverlay.MyNoTitleActivity">
+        </activity>
+
+        <activity
+            android:name="com.google.samples.quickstart.signin.IdTokenActivitySendBackend"
+            android:label="@string/name_backend_activity"
             android:theme="@style/ThemeOverlay.MyNoTitleActivity">
         </activity>
 

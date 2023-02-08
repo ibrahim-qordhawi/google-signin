@@ -45,6 +45,9 @@
     <string name="desc_rest_activity">Demonstrate using Google Sign In with a Google REST API</string>
     <string name="name_rest_activity">RestApiActivity</string>
 
+    <string name="desc_backend_activity">"Authenticating a user and send the ID Token to the backend server"</string>
+    <string name="name_backend_activity">IdTokenActivitySendBackend</string>
+
     <!-- Messages for the Rest API activity -->
     <string name="connections_fmt">Connections: %1$s</string>
     <string name="msg_contacts_failed">Get contacts failed.</string>
@@ -52,5 +55,8 @@
     <!-- TODO(user): replace with your real server client ID -->
     <!-- Server Client ID.  This should be a valid Web OAuth 2.0 Client ID obtained
          from https://console.developers.google.com/ -->
-    <string name="server_client_id">YOUR_SERVER_CLIENT_ID</string>
+    <string name="server_client_id">595343590409-s7itr1iglc1plec0s13oin623kb1uhsv.apps.googleusercontent.com</string>
+
+    <!-- ID Token Backend Post Request Destination -->
+    <string name="http_post_endpoint">https://oauth2.googleapis.com/tokeninfo</string>
 </resources>
