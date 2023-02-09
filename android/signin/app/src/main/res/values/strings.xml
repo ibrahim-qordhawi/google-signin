@@ -60,4 +60,9 @@
 
     <!-- ID Token Backend Post Request Destination -->
     <string name="http_post_endpoint">https://oauth2.googleapis.com/tokeninfo</string>
+
+    <!-- Facebook Sign-in -->
+    <string name="facebook_app_id">603783661581859</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">cbe44d9294b3a27d52bb191540ac7711</string>
 </resources>

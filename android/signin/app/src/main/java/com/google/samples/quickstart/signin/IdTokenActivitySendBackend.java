@@ -12,6 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.facebook.CallbackManager;
+import com.facebook.CallbackManager.Factory;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -35,6 +42,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -50,10 +58,34 @@ public class IdTokenActivitySendBackend extends AppCompatActivity implements
     private TextView mIdTokenTextView;
     private Button mRefreshButton;
 
-    @Override
+    private CallbackManager mFacebookCallbackManager;
+    private static final String EMAIL = "email";
+    private LoginButton mFacebookLoginButton;
+
+
+        @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mFacebookCallbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(mFacebookCallbackManager,
+            new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    // App code
+                }
+
+                @Override
+                public void onCancel() {
+                    // App code
+                }
+
+                @Override
+                public void onError(FacebookException exception) {
+                    // App code
+                }
+        });
 
         // Views
         mIdTokenTextView = findViewById(R.id.detail);
@@ -82,6 +114,30 @@ public class IdTokenActivitySendBackend extends AppCompatActivity implements
 
         // Build GoogleAPIClient with the Google Sign-In API and the above options.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+
+
+            mFacebookLoginButton = (LoginButton) findViewById(R.id.login_button);
+            mFacebookLoginButton.setReadPermissions(Arrays.asList(EMAIL));
+            // If you are using in a fragment, call loginButton.setFragment(this);
+
+            // Callback registration
+            mFacebookLoginButton.registerCallback(mFacebookCallbackManager, new FacebookCallback<LoginResult>() {
+                @Override
+                public void onSuccess(LoginResult loginResult) {
+                    // App code
+                }
+
+                @Override
+                public void onCancel() {
+                    // App code
+                }
+
+                @Override
+                public void onError(FacebookException exception) {
+                    // App code
+                }
+            });
     }
 
     private void getIdToken() {
@@ -181,6 +237,9 @@ public class IdTokenActivitySendBackend extends AppCompatActivity implements
             handleSignInResult(task);
             // [END get_id_token]
         }
+
+        mFacebookCallbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void updateUI(@Nullable GoogleSignInAccount account) {
